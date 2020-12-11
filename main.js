@@ -3,17 +3,21 @@ let currentMountain = undefined;
 shouldDrawBehind = true;
 
 document.addEventListener('mousedown', (e) => {
-    e.preventDefault();
     createNewMountain(e.offsetX, e.offsetY);
 });
-
+document.addEventListener('touchdown', (e) => {
+    createNewMountain(e.offsetX, e.offsetY);
+});
 document.addEventListener('mouseup', (e) => {
-    e.preventDefault();
     completeCurrentMountain();
 });
-
+document.addEventListener('touchup', (e) => {
+    completeCurrentMountain();
+});
 document.addEventListener('mousemove', (e) => {
-    e.preventDefault();
+    updateCurrentMountain(e.offsetX, e.offsetY);
+});
+document.addEventListener('touchmove', (e) => {
     updateCurrentMountain(e.offsetX, e.offsetY);
 });
 
