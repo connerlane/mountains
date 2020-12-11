@@ -5,20 +5,20 @@ shouldDrawBehind = true;
 document.addEventListener('mousedown', (e) => {
     createNewMountain(e.offsetX, e.offsetY);
 });
-document.addEventListener('touchdown', (e) => {
-    createNewMountain(e.offsetX, e.offsetY);
+document.addEventListener('touchstart', (e) => {
+    createNewMountain(e.touches[0].clientX, e.touches[0].clientY);
 });
 document.addEventListener('mouseup', (e) => {
     completeCurrentMountain();
 });
-document.addEventListener('touchup', (e) => {
+document.addEventListener('touchend', (e) => {
     completeCurrentMountain();
 });
 document.addEventListener('mousemove', (e) => {
     updateCurrentMountain(e.offsetX, e.offsetY);
 });
 document.addEventListener('touchmove', (e) => {
-    updateCurrentMountain(e.offsetX, e.offsetY);
+    updateCurrentMountain(e.touches[0].clientX, e.touches[0].clientY);
 });
 
 document.addEventListener('keydown', (e) => {
