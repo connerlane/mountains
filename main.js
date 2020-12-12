@@ -1,35 +1,45 @@
 const mountains = [];
 let currentMountain = undefined;
 shouldDrawBehind = true;
+touchDevice = false;
 
-document.addEventListener('mousedown', (e) => {
-    createNewMountain(e.offsetX, e.offsetY);
-});
 document.addEventListener('touchstart', (e) => {
+    touchDevice = true;
     createNewMountain(e.touches[0].clientX, e.touches[0].clientY);
-});
-document.addEventListener('mouseup', (e) => {
-    completeCurrentMountain();
 });
 document.addEventListener('touchend', (e) => {
     completeCurrentMountain();
 });
-document.addEventListener('mousemove', (e) => {
-    updateCurrentMountain(e.offsetX, e.offsetY);
-});
 document.addEventListener('touchmove', (e) => {
     updateCurrentMountain(e.touches[0].clientX, e.touches[0].clientY);
 });
+
+document.addEventListener('mousedown', (e) => {
+    if (!touchDevice) {
+        createNewMountain(e.offsetX, e.offsetY);
+    }
+});
+document.addEventListener('mouseup', (e) => {
+    if (!touchDevice) {
+        completeCurrentMountain();
+    }
+});
+document.addEventListener('mousemove', (e) => {
+    if (!touchDevice) {
+        updateCurrentMountain(e.offsetX, e.offsetY);
+    }
+});
+
 
 document.addEventListener('keydown', (e) => {
     if (e.code === "Space") {
         e.preventDefault();
         shouldDrawBehind = !shouldDrawBehind; // toggle
         console.log(`Draw Behind = ${shouldDrawBehind}`);
-    }   
+    }
 });
 
-/** Main loop */ 
+/** Main loop */
 const update = function () {
     // wipe the screen
     ctx.clearRect(0, 0, canvas.width, canvas.height);
